@@ -12,6 +12,7 @@ import java.util.List;
 public class ProfessorService {
 
     private final ProfessorRepository repository;
+    private final EmailService emailService;
 
     public Professor create(Professor professor) {
         return repository.save(professor);
@@ -30,6 +31,17 @@ public class ProfessorService {
         return repository.findByEmail(email)
                 .map(professor -> professor.login(email, password))
                 .orElse(false);
+    }
+
+    public void sendNotification(Long id, String message) {
+        Professor professor = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Profesor no encontrado"));
+
+        emailService.sendEmail(
+                professor.getEmail(),
+                "Notificacion academica para profesor",
+                "Hola " + professor.getName() + ",\n\n" + message
+        );
     }
 
     public void delete(Long id) {

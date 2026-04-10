@@ -1,5 +1,6 @@
 package co.ucc.ejercicio.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -9,10 +10,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "students")
+@Schema(description = "Estudiante del sistema")
 @Getter
 @NoArgsConstructor
 public class Student extends Person implements Notifiable, Authenticable {
 
+    @Schema(description = "Codigo del estudiante", example = "EST-1001")
     private String studentCode;
 
     public Student(String name, String email, String studentCode) {

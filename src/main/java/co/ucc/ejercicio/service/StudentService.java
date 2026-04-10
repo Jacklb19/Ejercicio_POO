@@ -44,6 +44,17 @@ public class StudentService {
                 .orElse(false);
     }
 
+    public void sendNotification(Long id, String message) {
+        Student student = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
+
+        emailService.sendEmail(
+                student.getEmail(),
+                "Notificacion academica para estudiante",
+                "Hola "
+        );
+    }
+
     public void delete(Long id) {
         repository.deleteById(id);
     }

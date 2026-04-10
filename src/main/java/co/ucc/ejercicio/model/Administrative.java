@@ -1,5 +1,6 @@
 package co.ucc.ejercicio.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -9,10 +10,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "administratives")
+@Schema(description = "Usuario administrativo del sistema")
 @Getter
 @NoArgsConstructor
 public class Administrative extends Person implements Approver, Notifiable, Authenticable {
 
+    @Schema(description = "Area administrativa", example = "Registro academico")
     private String area;
 
     public Administrative(String name, String email, String area) {

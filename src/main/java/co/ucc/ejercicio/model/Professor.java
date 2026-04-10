@@ -1,5 +1,6 @@
 package co.ucc.ejercicio.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -9,10 +10,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "professors")
+@Schema(description = "Profesor del sistema")
 @Getter
 @NoArgsConstructor
 public class Professor extends Person implements Authenticable, Evaluator, Notifiable {
 
+    @Schema(description = "Especialidad del profesor", example = "Matematicas")
     private String specialty;
 
     public Professor(String name, String email, String specialty) {
